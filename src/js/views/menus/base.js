@@ -16,11 +16,16 @@ var BaseMenuView = BaseView.extend({
 	template: baseMenuTemplate,
 
 	initialize: function(options) {
+		var menuView = this;
+
+		BaseView.prototype.initialize.apply(this, arguments);
+
 		var options = $.extend({}, {
 			'panel': $('#panel').get(0),
 			'padding': 256,
 			'tolerance': 70,
-			'side': 'left'
+			'side': 'left',
+			'navbar': false
 		}, options);
 
 		this.menu = new Slideout({
@@ -31,24 +36,28 @@ var BaseMenuView = BaseView.extend({
 	    'side': options.side
 	  });
 
+	  if (options.side === 'right') {
+	  	this.$el.addClass('slideout-menu-right');
+	  }
+
 	  this.menu.on('beforeopen', function() {
-	  	$('body').addClass('slideout-open');
-	  	$('.slidesout').add('#intercom-conversations').add('#intercom-conversation').each(function() {
+	  	$('.slidesout').each(function() {
 	  		var $this = $(this);
 	  		$this.attr('style', ($this.attr('style') || '').replace(/;transition: none; transform:.*?;/, ''));
-		  });
+	  		$this.addClass('slidesout-' + options.side);
+	  	});
 	  });
 
 	  this.menu.on('beforeclose', function() {
-	  	$('body').removeClass('slideout-open');
-	  	$('.slidesout').add('#intercom-conversations').add('#intercom-conversation').each(function() {
+	  	$('.slidesout').each(function() {
 	  		var $this = $(this);
 	  		$this.attr('style', ($this.attr('style') || '').replace(/;transition: none; transform:.*?;/, ''));
+	  		$this.removeClass('slidesout-' + options.side);
 		  });
 	  });
 
 	  this.menu.on('translate', function(translated) {
-	  	$('.slidesout').add('#intercom-conversations').add('#intercom-conversation').each(function() {
+	  	$('.slidesout').each(function() {
 	  		var $this = $(this);
 	  		$this.attr('style', ($this.attr('style') || '').replace(/;transition: none; transform:.*?;/, ''));
 		  	$this.attr('style', $this.attr('style') + ';transition: none; transform: translate3d(' + translated + 'px, 0px, 0px);');
@@ -56,11 +65,18 @@ var BaseMenuView = BaseView.extend({
 	  });
 
 	  this.menu.on('translateend', function() {
-	  	$('.slidesout').add('#intercom-conversations').add('#intercom-conversation').each(function() {
+	  	$('.slidesout').each(function() {
 	  		var $this = $(this);
 	  		$this.attr('style', ($this.attr('style') || '').replace(/;transition: none; transform:.*?;/, ''));
 		  });
 	  });
+
+	  if (options.navbar) {
+			options.navbar.$el.find('[data-action="toggle-' + options.side + '-side-menu"]').click(function() {
+				menuView.menu.toggle();
+				$('.slidesout').toggleClass('slidesout-' + options.side, menuView.menu.isOpen());
+			});	
+		}
 	}
 
 });

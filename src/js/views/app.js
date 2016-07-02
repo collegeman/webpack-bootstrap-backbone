@@ -7,7 +7,6 @@ var Backbone = require('backbone');
 var User = require('models/user');
 var AuthModalView = require('views/modals/auth');
 var rivets = require('rivets');
-var Slideout = require('slideout');
 var BaseMenuView = require('views/menus/base');
 var BootstrapNavbarView = require('views/bootstrap/navbar');
 
@@ -30,9 +29,9 @@ var AppView = Backbone.View.extend({
 
 	navbarClass: BootstrapNavbarView,
 
-	leftSideMenuClass: BaseMenuView,
+	leftSideMenuClass: false,
 
-	rightSideMenuClass: false,
+	rightSideMenuClass: BaseMenuView,
 
 	initialize: function(options) {
 		Backbone.View.prototype.initialize.apply(this, arguments);		
@@ -76,20 +75,23 @@ var AppView = Backbone.View.extend({
 		if (this.navbarClass) {
 			this.navbar = new this.navbarClass();
 			$('body').append( this.navbar.render().$el );
+			if (this.navbar.$el.hasClass('navbar-fixed-top')) {
+				$('body').addClass('with-navbar-fixed-top');
+			}
 		}
 	},
 
 	_initSlideoutMenus: function() {
 		if (this.leftSideMenuClass) {
 			this.$el.addClass('slideout-panel');
-			this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, navbar: this.navbar });
-			$('body').append( this.leftSideMenu.render().$el );
+			this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'left' });
+			this.$el.before( this.leftSideMenu.render().$el );
 		}
 
 		if (this.rightSideMenuClass) {
 			this.$el.addClass('slideout-panel');
-			this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, navbar: this.navbar });
-			$('body').append( this.rightSideMenu.render().$el );
+			this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'right' });
+			this.$el.before( this.rightSideMenu.render().$el );
 		}
 	}
 

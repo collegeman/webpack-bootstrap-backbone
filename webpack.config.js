@@ -12,7 +12,7 @@ module.exports = {
 
  	output: {
     path: './bin',
-    filename: 'app.bundle.js'
+    filename: 'app.bundle.js',
     publicPath: 'bin/'
  	},
 
