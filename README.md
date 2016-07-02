@@ -42,7 +42,7 @@ recommend you give it a look.
 I tried to keep the files organized as logically and as close to
 the webpack documentation as possible:
 
-<img src="http://cl.ly/3b0P1q0D2Q1z/Screen%20Shot%202016-07-02%20at%2012.21.15%20PM.png" style="width:179px">
+<img src="http://cl.ly/3b0P1q0D2Q1z/Screen%20Shot%202016-07-02%20at%2012.21.15%20PM.png" width="179px">
 
 You'll find all application source in `src`, divided into JavaScript,
 LESS, and Template source, respectively. 
@@ -101,7 +101,7 @@ singing out, and requesting password resets. I built this to look
 something like [this](https://www.facebook.com/designmodo/posts/1016706261712043)
 awesome concept from DesignModo. Mine looks like this:
 
-<img src="https://s3.amazonaws.com/f.cl.ly/items/3j1E2V2m241p2b0J1l3f/Screen%20Recording%202016-07-02%20at%2011.58%20AM.gif" alt="AuthModalView" style="max-width:300px;">
+<img src="https://s3.amazonaws.com/f.cl.ly/items/3j1E2V2m241p2b0J1l3f/Screen%20Recording%202016-07-02%20at%2011.58%20AM.gif" alt="AuthModalView" width="300">
 
 You can open the modal from any context by invoking `new AuthModalView().show()`,
 but it makes the most sense to let your `AppView` do this when necessary.
