@@ -1,0 +1,79 @@
+.modal-dialog-auth {
+
+	max-width: 400px;
+	margin: 100px auto 0 !important;
+
+	@media screen and (max-width: @screen-xs) {
+		max-width: auto;
+		margin: 100px 15px 0 !important;
+	}
+
+	position: relative;
+
+	.alert {
+		text-align: center;
+
+		&.alert-danger {
+			.alert-variant(@alert-info-bg; @alert-info-border; @alert-info-text);
+		}
+	}
+
+	.arrow-up {
+		display: none;
+	  width: 0; 
+	  height: 0; 
+	  border-left: 8px solid transparent;
+	  border-right: 8px solid transparent;	  
+	  border-bottom: 8px solid white;
+	  position: absolute;
+	  top: 44px;
+	  left: 32px;
+	}
+
+	&.signin {
+		.arrow-up {
+			display: block;
+		}
+	}
+
+	&.signup {
+		.arrow-up {
+			display: block;
+			left: 120px;
+		}
+	}
+
+	&.reset {
+		.arrow-up {
+			left: auto;
+			display: block;
+			right: 32px;
+		}
+	}
+
+	.nav-tabs {
+
+		border: none !important;
+		margin-bottom: 10px;
+		
+		li {
+
+			a {
+				text-transform: uppercase;
+				background-color: transparent !important;
+				border: none !important;
+				font-weight: bold;
+				color: @brand-primary !important;
+			}
+
+			&.active {
+				a {
+					color: white !important;
+				}
+			}
+		}
+
+
+	}
+
+}

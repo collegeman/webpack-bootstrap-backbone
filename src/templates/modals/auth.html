@@ -1,0 +1,24 @@
+<form class="modal-dialog modal-dialog-auth">
+  <input type="hidden" name="action" value="signin">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#signin" aria-controls="home" role="tab" data-toggle="tab">Sign In</a></li>
+    <li role="presentation"><a href="#signup" aria-controls="profile" role="tab" data-toggle="tab">Sign Up</a></li>
+    <li role="presentation" class="pull-right"><a href="#reset" aria-controls="settings" role="tab" data-toggle="tab">Reset</a></li>
+  </ul>
+  <div class="form-group">
+    <input type="text" rv-bind="model:email" class="form-control input-lg" placeholder="E-mail">
+  </div>
+  <div class="form-group" rv-hide="model:isResetMode">
+    <input type="password" rv-bind="model:password" class="form-control input-lg" placeholder="Password" value="">
+  </div>
+  <div class="form-group" rv-show="model:isSignUpMode">
+    <input type="password" class="form-control input-lg" rv-bind="model:password_confirmation" placeholder="Repeat password" value="">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-lg btn-block" rv-show="model:isSignInMode" data-loading-text="Signing you in...">Sign In</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" rv-show="model:isSignUpMode" data-loading-text="Signing up...">Sign Up</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" rv-show="model:isResetMode" data-loading-text="Sending reset e-mail...">Reset password</button>
+  </div>
+  <div class="alert" style="display:none;"></div>
+  <div class="arrow-up"></div>
+</form><!-- /.modal-dialog -->
