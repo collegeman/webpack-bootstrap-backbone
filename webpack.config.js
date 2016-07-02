@@ -13,6 +13,7 @@ module.exports = {
  	output: {
     path: './bin',
     filename: 'app.bundle.js'
+    publicPath: 'bin/'
  	},
 
  	resolve: {

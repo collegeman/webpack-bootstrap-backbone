@@ -1,0 +1,18 @@
+/**
+ * Slight tweak to the way .btn-link.btn-lg renders in navbars
+ */
+.navbar {
+
+	.btn-link.btn-lg {
+		padding: 12px 8px;
+
+		&.btn-menu {
+			padding: 12px 16px;
+		}
+
+		&.offset-gutter-right {
+			margin-right: ( -1 * @grid-gutter-width / 2 );
+		}
+	}
+
+}

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Thinnest possible base view for Bootstrap modals.
  * When hidden, the modal removes itself from the DOM.

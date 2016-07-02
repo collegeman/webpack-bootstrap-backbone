@@ -1,3 +1,5 @@
+'use strict';
+
 var rivets = require('rivets');
 var Backbone = require('backbone');
 var BootstrapModalView = require('views/bootstrap/modal');

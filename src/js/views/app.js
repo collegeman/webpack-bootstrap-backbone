@@ -8,16 +8,29 @@ var User = require('models/user');
 var AuthModalView = require('views/modals/auth');
 var rivets = require('rivets');
 var Slideout = require('slideout');
+var BaseMenuView = require('views/menus/base');
+var BootstrapNavbarView = require('views/bootstrap/navbar');
 
 var AppView = Backbone.View.extend({
 
 	id: 'panel',
 
+	/**
+	 * Extend models/user to create your own User
+	 * object; but make sure to implement the methods
+	 * for login, logout, reset, and register
+	 */
 	userClass: User,
 
-	requiresSession: true,
+	/**
+	 * Set this to true to require an authenticated
+	 * session on app startup.
+	 */
+	requiresSession: false,
 
-	leftSideMenuClass: false,
+	navbarClass: BootstrapNavbarView,
+
+	leftSideMenuClass: BaseMenuView,
 
 	rightSideMenuClass: false,
 
@@ -33,6 +46,8 @@ var AppView = Backbone.View.extend({
 		this.render();
 		// initialize the user object
 		this._initUserObject();
+		// initialize the navbar
+		this._initNavbar();
 		// initialize any slideout menus
 		this._initSlideoutMenus();
 		// if this app requires a session, kick-off logged-in state test
@@ -57,16 +72,23 @@ var AppView = Backbone.View.extend({
 		});
 	},
 
+	_initNavbar: function() {
+		if (this.navbarClass) {
+			this.navbar = new this.navbarClass();
+			$('body').append( this.navbar.render().$el );
+		}
+	},
+
 	_initSlideoutMenus: function() {
 		if (this.leftSideMenuClass) {
 			this.$el.addClass('slideout-panel');
-			this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el });
+			this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, navbar: this.navbar });
 			$('body').append( this.leftSideMenu.render().$el );
 		}
 
 		if (this.rightSideMenuClass) {
 			this.$el.addClass('slideout-panel');
-			this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el });
+			this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, navbar: this.navbar });
 			$('body').append( this.rightSideMenu.render().$el );
 		}
 	}

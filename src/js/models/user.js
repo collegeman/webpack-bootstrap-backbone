@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Basic user object.
  */

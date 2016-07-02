@@ -70,8 +70,9 @@ Those things are:
 
 Things I'll be adding when I have time:
 
+- Font Awesome
 - Contenxt sensitive navbars
-- Page transitions
+- Managing and animating stacks of screens
 - A standard way of presenting notifications
 
 ### The main file

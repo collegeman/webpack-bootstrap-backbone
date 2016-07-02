@@ -1,6 +1,11 @@
+'use strict';
+
 var $ = require('jquery');
 var Backbone = require('backbone');
-var baseMenuTemplate = require('text!templates/menu/base.html');
+var BaseView = require('views/base');
+var baseMenuTemplate = require('text!templates/menus/base.html');
+var Slideout = require('slideout');
+
 
 var BaseMenuView = BaseView.extend({
 
