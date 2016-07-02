@@ -2,6 +2,7 @@ var rivets = require('rivets');
 var Backbone = require('backbone');
 var BootstrapModalView = require('views/bootstrap/modal');
 var authModalTemplate = require('text!templates/modals/auth.html');
+var User = require('user');
 var $ = require('jquery');
 
 var AuthModalView = BootstrapModalView.extend({
@@ -30,7 +31,7 @@ var AuthModalView = BootstrapModalView.extend({
 	initialize: function(options) {
 		BootstrapModalView.prototype.initialize.apply(this, arguments);
 
-		this.user = options.user;
+		this.user = options.user || new User();
 
 		this.listenTo(this.model, 'change:mode', function() {
 			var mode = this.model.get('mode');
