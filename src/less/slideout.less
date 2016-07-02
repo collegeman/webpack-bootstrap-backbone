@@ -31,8 +31,24 @@ body {
   display: none;
   background-color: @slideout-menu-bg;
 
+  &.slideout-menu-left {
+    left: 0;
+  }
+
   &.slideout-menu-right {
   	left: auto;
+  }
+}
+
+body.slideout-open-right {
+  .slideout-menu.slideout-menu-left {
+    display: none !important;
+  }
+}
+
+body.slideout-open-left {
+  .slideout-menu.slideout-menu-right {
+    display: none !important;
   }
 }
 

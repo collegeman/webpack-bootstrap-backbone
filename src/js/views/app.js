@@ -29,7 +29,7 @@ var AppView = Backbone.View.extend({
 
 	navbarClass: BootstrapNavbarView,
 
-	leftSideMenuClass: false,
+	leftSideMenuClass: BaseMenuView,
 
 	rightSideMenuClass: BaseMenuView,
 

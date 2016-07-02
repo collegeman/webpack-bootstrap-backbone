@@ -22,7 +22,7 @@ var BaseMenuView = BaseView.extend({
 
 		var options = $.extend({}, {
 			'panel': $('#panel').get(0),
-			'padding': 256,
+			'padding': 256, // TODO: get from CSS somehow
 			'tolerance': 70,
 			'side': 'left',
 			'navbar': false
@@ -36,11 +36,10 @@ var BaseMenuView = BaseView.extend({
 	    'side': options.side
 	  });
 
-	  if (options.side === 'right') {
-	  	this.$el.addClass('slideout-menu-right');
-	  }
-
+	 	this.$el.addClass('slideout-menu-' + options.side);
+	 
 	  this.menu.on('beforeopen', function() {
+	  	$('body').addClass('slideout-open-' + options.side);
 	  	$('.slidesout').each(function() {
 	  		var $this = $(this);
 	  		$this.attr('style', ($this.attr('style') || '').replace(/;transition: none; transform:.*?;/, ''));
@@ -54,6 +53,10 @@ var BaseMenuView = BaseView.extend({
 	  		$this.attr('style', ($this.attr('style') || '').replace(/;transition: none; transform:.*?;/, ''));
 	  		$this.removeClass('slidesout-' + options.side);
 		  });
+	  });
+
+	  this.menu.on('close', function() {
+	  	$('body').removeClass('slideout-open-' + options.side);
 	  });
 
 	  this.menu.on('translate', function(translated) {
