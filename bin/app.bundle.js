@@ -19692,7 +19692,7 @@
 	var Backbone = __webpack_require__(124);
 	var BootstrapModalView = __webpack_require__(135);
 	var authModalTemplate = __webpack_require__(138);
-	var User = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"user\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var User = __webpack_require__(133);
 	var $ = __webpack_require__(100);
 
 	var AuthModalView = BootstrapModalView.extend({

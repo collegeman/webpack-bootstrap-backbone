@@ -2,7 +2,7 @@ var rivets = require('rivets');
 var Backbone = require('backbone');
 var BootstrapModalView = require('views/bootstrap/modal');
 var authModalTemplate = require('text!templates/modals/auth.html');
-var User = require('user');
+var User = require('models/user');
 var $ = require('jquery');
 
 var AuthModalView = BootstrapModalView.extend({
