@@ -4,7 +4,7 @@ var BootstrapModalView = require('views/bootstrap/modal');
 var authModalTemplate = require('text!templates/modals/auth.html');
 var $ = require('jquery');
 
-module.exports = BootstrapModalView.extend({
+var AuthModalView = BootstrapModalView.extend({
 
 	events: {
 		'show.bs.tab': function(e) {
@@ -32,8 +32,6 @@ module.exports = BootstrapModalView.extend({
 
 		this.user = options.user;
 
-		this.model = new Backbone.Model();
-
 		this.listenTo(this.model, 'change:mode', function() {
 			var mode = this.model.get('mode');
 			this.model.set({
@@ -42,8 +40,6 @@ module.exports = BootstrapModalView.extend({
 				'isSignUpMode': mode === 'signup'
 			});
 		});
-
-		rivets.bind(this.$el, this);
 
 		this.model.set('mode', 'signin');
 		this.$('.modal-dialog').addClass('signin');
@@ -89,7 +85,25 @@ module.exports = BootstrapModalView.extend({
 				authModal.error(error);
 			});
 
+		} else if (mode === 'reset') {
+			if (!data.email) {
+				this.error('E-mail is required.');
+				deferred.reject();
+				return deferred;
+			} 
+
+			this.user.reset(data.email).then(function() {
+				deferred.resolve();
+				authModal.model.clear();
+				this.info('A password reset link has been sent to your e-mail.');
+			}).fail(function(error) {
+				deferred.reject();
+				authModal.error(error);
+			});
+
 		}
+
+		return deferred;
 	},
 
 	info: function(text) {
@@ -106,3 +120,5 @@ module.exports = BootstrapModalView.extend({
 	}
 
 });
+
+module.exports = AuthModalView;

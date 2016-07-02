@@ -26,6 +26,7 @@
     "json-loader": "^0.5.4",
     "markdown-loader": "^0.1.7",
     "rivets": "^0.9.1",
+    "slideout": "^0.1.12",
     "style-loader": "^0.13.1",
     "text-loader": "0.0.1",
     "underscore": "^1.8.3",

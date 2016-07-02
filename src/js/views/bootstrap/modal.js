@@ -4,9 +4,10 @@
  */
 var $ = require('jquery');
 var Backbone = require('backbone');
-var baseModalTemplate = require('text!templates/modals/base.html');
+var BaseView = require('views/base');
+var baseModalTemplate = require('text!templates/bootstrap/modal.html');
 
-var BootstrapModalView = Backbone.View.extend({
+var BootstrapModalView = BaseView.extend({
 
 	tagName: 'div',
 
@@ -21,7 +22,7 @@ var BootstrapModalView = Backbone.View.extend({
 	},
 
 	initialize: function() {
-		Backbone.View.prototype.initialize.apply(this, arguments);
+		BaseView.prototype.initialize.apply(this, arguments);
 		// incorporate subclass' events for delegation
 		this.events = $.extend({}, BootstrapModalView.prototype.events, this.events || {});
 		
@@ -29,9 +30,10 @@ var BootstrapModalView = Backbone.View.extend({
 	},
 
 	render: function() {
+		BaseView.prototype.render.apply(this, arguments);
+
 		this.$el.attr('tabindex', -1);
 		this.$el.attr('role', 'dialog');
-		this.$el.html(this.template);
 		$('body').append(this.$el);
 		return this;
 	},
