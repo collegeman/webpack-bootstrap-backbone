@@ -90,7 +90,9 @@ var AppView = Backbone.View.extend({
 				this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
 			});
 			this.listenTo(this.leftSideMenu, 'close', function() {
-				this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+				setTimeout(_.bind(function() {
+					this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+				}, this), 500);
 			});
 		}
 
@@ -102,7 +104,9 @@ var AppView = Backbone.View.extend({
 				this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
 			});
 			this.listenTo(this.rightSideMenu, 'close', function() {
-				this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+				setTimeout(_.bind(function() {
+					this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+				}, this), 500);
 			});
 		}
 	}

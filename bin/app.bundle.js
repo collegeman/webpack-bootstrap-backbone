@@ -19642,7 +19642,9 @@
 					this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
 				});
 				this.listenTo(this.leftSideMenu, 'close', function() {
-					this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+					setTimeout(_.bind(function() {
+						this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+					}, this), 500);
 				});
 			}
 
@@ -19654,7 +19656,9 @@
 					this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
 				});
 				this.listenTo(this.rightSideMenu, 'close', function() {
-					this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+					setTimeout(_.bind(function() {
+						this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+					}, this), 500);
 				});
 			}
 		}
