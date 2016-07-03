@@ -86,12 +86,24 @@ var AppView = Backbone.View.extend({
 			this.$el.addClass('slideout-panel');
 			this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'left' });
 			this.$el.before( this.leftSideMenu.render().$el );
+			this.listenTo(this.leftSideMenu, 'open', function() {
+				this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
+			});
+			this.listenTo(this.leftSideMenu, 'close', function() {
+				this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+			});
 		}
 
 		if (this.rightSideMenuClass) {
 			this.$el.addClass('slideout-panel');
 			this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'right' });
 			this.$el.before( this.rightSideMenu.render().$el );
+			this.listenTo(this.rightSideMenu, 'open', function() {
+				this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
+			});
+			this.listenTo(this.rightSideMenu, 'close', function() {
+				this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+			});
 		}
 	}
 

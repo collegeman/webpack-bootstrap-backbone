@@ -19638,12 +19638,24 @@
 				this.$el.addClass('slideout-panel');
 				this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'left' });
 				this.$el.before( this.leftSideMenu.render().$el );
+				this.listenTo(this.leftSideMenu, 'open', function() {
+					this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
+				});
+				this.listenTo(this.leftSideMenu, 'close', function() {
+					this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+				});
 			}
 
 			if (this.rightSideMenuClass) {
 				this.$el.addClass('slideout-panel');
 				this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'right' });
 				this.$el.before( this.rightSideMenu.render().$el );
+				this.listenTo(this.rightSideMenu, 'open', function() {
+					this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
+				});
+				this.listenTo(this.rightSideMenu, 'close', function() {
+					this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+				});
 			}
 		}
 
@@ -20010,7 +20022,12 @@
 			  });
 		  });
 
+		  this.menu.on('open', function() {
+		  	menuView.trigger('open');
+		  });
+
 		  this.menu.on('close', function() {
+		  	menuView.trigger('close');
 		  	$('body').removeClass('slideout-open-' + options.side);
 		  });
 
@@ -20605,7 +20622,7 @@
 /* 146 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container-fluid\">\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header pull-left\">\n    <a class=\"navbar-brand\" href=\"#\" data-action=\"toggle-left-side-menu\">Brand</a>\n  </div>\n\n  <!-- Collect the nav links, forms, and other content for toggling -->\n  <ul class=\"nav navbar-nav hidden-xs hidden-sm\">\n    <li class=\"active\"><a href=\"#\">Link <span class=\"sr-only\">(current)</span></a></li>\n    <li><a href=\"#\">Link</a></li>\n    <li class=\"dropdown\">\n      <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n      <ul class=\"dropdown-menu\">\n        <li><a href=\"#\">Action</a></li>\n        <li><a href=\"#\">Another action</a></li>\n        <li><a href=\"#\">Something else here</a></li>\n        <li role=\"separator\" class=\"divider\"></li>\n        <li><a href=\"#\">Separated link</a></li>\n        <li role=\"separator\" class=\"divider\"></li>\n        <li><a href=\"#\">One more separated link</a></li>\n      </ul>\n    </li>\n  </ul>\n\n  <form class=\"navbar-form navbar-left hidden-xs hidden-sm\" role=\"search\">\n    <div class=\"form-group\">\n      <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n    </div>\n    <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n  </form>\n\n  <a href=\"#\" class=\"btn btn-link btn-lg pull-right offset-gutter-right btn-menu\" data-action=\"toggle-right-side-menu\"><span class=\"glyphicon glyphicon-menu-hamburger\"></span></a>\n\n  <a href=\"#\" class=\"btn btn-link btn-lg pull-right\"><span class=\"glyphicon glyphicon-search\"></span></a>\n\n  <ul class=\"nav navbar-nav navbar-right hidden-xs hidden-sm\">\n    <li><a href=\"#\">Link</a></li>\n    <li class=\"dropdown\">\n      <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n      <ul class=\"dropdown-menu\">\n        <li><a href=\"#\">Action</a></li>\n        <li><a href=\"#\">Another action</a></li>\n        <li><a href=\"#\">Something else here</a></li>\n        <li role=\"separator\" class=\"divider\"></li>\n        <li><a href=\"#\">Separated link</a></li>\n      </ul>\n    </li>\n  </ul>\n\n</div><!-- /.container-fluid -->"
+	module.exports = "<div class=\"container-fluid\">\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header pull-left\">\n    <a class=\"navbar-brand\" href=\"#\" data-action=\"toggle-left-side-menu\">Brand</a>\n  </div>\n\n  <!-- Collect the nav links, forms, and other content for toggling -->\n  <ul class=\"nav navbar-nav hidden-xs hidden-sm\">\n    <li class=\"active\"><a href=\"#\">Link <span class=\"sr-only\">(current)</span></a></li>\n    <li><a href=\"#\">Link</a></li>\n    <li class=\"dropdown\">\n      <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n      <ul class=\"dropdown-menu\">\n        <li><a href=\"#\">Action</a></li>\n        <li><a href=\"#\">Another action</a></li>\n        <li><a href=\"#\">Something else here</a></li>\n        <li role=\"separator\" class=\"divider\"></li>\n        <li><a href=\"#\">Separated link</a></li>\n        <li role=\"separator\" class=\"divider\"></li>\n        <li><a href=\"#\">One more separated link</a></li>\n      </ul>\n    </li>\n  </ul>\n\n  <form class=\"navbar-form navbar-left hidden-xs hidden-sm\" role=\"search\">\n    <div class=\"form-group\">\n      <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n    </div>\n    <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n  </form>\n\n  <a href=\"#\" class=\"btn btn-link btn-lg pull-right offset-gutter-right btn-menu\" data-action=\"toggle-right-side-menu\"><span class=\"glyphicon glyphicon-menu-hamburger\"></span></a>\n\n  <a href=\"#\" class=\"btn btn-link btn-lg pull-right\"><span class=\"glyphicon glyphicon-search\"></span></a>\n\n</div><!-- /.container-fluid -->"
 
 /***/ }
 /******/ ]);

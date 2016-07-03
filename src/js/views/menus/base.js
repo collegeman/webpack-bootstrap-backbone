@@ -55,7 +55,12 @@ var BaseMenuView = BaseView.extend({
 		  });
 	  });
 
+	  this.menu.on('open', function() {
+	  	menuView.trigger('open');
+	  });
+
 	  this.menu.on('close', function() {
+	  	menuView.trigger('close');
 	  	$('body').removeClass('slideout-open-' + options.side);
 	  });
 
