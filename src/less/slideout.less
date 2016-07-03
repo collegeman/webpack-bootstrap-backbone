@@ -57,12 +57,18 @@ body.slideout-open-left {
   background-color: @body-bg;
   z-index: 1;
   will-change: transform;
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 body.with-navbar-fixed-top {
   .slideout-panel {
-    padding-top: @navbar-height + @navbar-margin-bottom;
+    top: @navbar-height;
   }
 }
 
