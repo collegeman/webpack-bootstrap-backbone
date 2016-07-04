@@ -9,7 +9,7 @@ var BootstrapNavbarView = BaseView.extend({
 
 	tagName: 'nav',
 
-	className: 'navbar navbar-default navbar-fixed-top slidesout',
+	className: 'navbar navbar-default navbar-fixed-top',
 
 	template: baseNavbarTemplate
 

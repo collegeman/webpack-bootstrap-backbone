@@ -46,12 +46,12 @@ $(function() {
   };
   FastClick.attach(document.body);
 
+  // initialize our app view
+  var app = new AppView();
+
   // initialize our router
-	var router = new Workspace();
-
-	// initialize our app view
-	new AppView({ 'router': router });
-
+	new Workspace({ 'app': app });
+	
 	// and start keeping track of browser history changes
 	Backbone.history.start({pushState: true});
 });

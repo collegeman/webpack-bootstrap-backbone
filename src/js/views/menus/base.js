@@ -6,7 +6,6 @@ var BaseView = require('views/base');
 var baseMenuTemplate = require('text!templates/menus/base.html');
 var Slideout = require('slideout');
 
-
 var BaseMenuView = BaseView.extend({
 
 	tagName: 'nav',
@@ -24,8 +23,7 @@ var BaseMenuView = BaseView.extend({
 			'panel': $('#panel').get(0),
 			'padding': 256, // TODO: get from CSS somehow
 			'tolerance': 70,
-			'side': 'left',
-			'navbar': false
+			'side': 'left'
 		}, options);
 
 		this.menu = new Slideout({
@@ -56,11 +54,13 @@ var BaseMenuView = BaseView.extend({
 	  });
 
 	  this.menu.on('open', function() {
+	  	$('.slidesout').addClass('slidesout-' + options.side);
 	  	menuView.trigger('open');
 	  });
 
 	  this.menu.on('close', function() {
 	  	menuView.trigger('close');
+	  	$('.slidesout').removeClass('slidesout-' + options.side);
 	  	$('body').removeClass('slideout-open-' + options.side);
 	  });
 
@@ -82,7 +82,7 @@ var BaseMenuView = BaseView.extend({
 	  if (options.navbar) {
 			options.navbar.$el.find('[data-action="toggle-' + options.side + '-side-menu"]').click(function() {
 				menuView.menu.toggle();
-				$('.slidesout').toggleClass('slidesout-' + options.side, menuView.menu.isOpen());
+				
 			});	
 		}
 	}

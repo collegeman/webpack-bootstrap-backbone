@@ -7,12 +7,9 @@ var Backbone = require('backbone');
 var User = require('models/user');
 var AuthModalView = require('views/modals/auth');
 var rivets = require('rivets');
-var BaseMenuView = require('views/menus/base');
-var BootstrapNavbarView = require('views/bootstrap/navbar');
+var Navstack = require('navstack');
 
 var AppView = Backbone.View.extend({
-
-	id: 'panel',
 
 	/**
 	 * Extend models/user to create your own User
@@ -27,37 +24,25 @@ var AppView = Backbone.View.extend({
 	 */
 	requiresSession: false,
 
-	navbarClass: BootstrapNavbarView,
-
-	leftSideMenuClass: BaseMenuView,
-
-	rightSideMenuClass: BaseMenuView,
-
 	initialize: function(options) {
 		Backbone.View.prototype.initialize.apply(this, arguments);		
 		// incorporate subclass' events for delegation
 		this.events = $.extend({}, AppView.prototype.events, this.events || {});
-		// stash the router
-		this.router = options.router;
-		// drop the panel into the body
+		// setup the navstack
+		this.stage = new Navstack({
+			el: this.$el
+		});
+		// drop this container into the body
 		$('body').append(this.$el);
-		// call render automatically
-		this.render();
+		// make navstack window height
+		this.$el.height( $(window).height() );
 		// initialize the user object
 		this._initUserObject();
-		// initialize the navbar
-		this._initNavbar();
-		// initialize any slideout menus
-		this._initSlideoutMenus();
 		// if this app requires a session, kick-off logged-in state test
 		if (this.requiresSession) {
 			// determine whether or not the user is logged in
 			this.user.isLoggedIn();
 		}
-	},
-
-	render: function() {
-		return this;
 	},
 
 	_initUserObject: function() {
@@ -69,46 +54,6 @@ var AppView = Backbone.View.extend({
 				new AuthModalView({ user: this.user }).show().info('Please sign in or sign up.');
 			}
 		});
-	},
-
-	_initNavbar: function() {
-		if (this.navbarClass) {
-			this.navbar = new this.navbarClass();
-			$('body').append( this.navbar.render().$el );
-			if (this.navbar.$el.hasClass('navbar-fixed-top')) {
-				$('body').addClass('with-navbar-fixed-top');
-			}
-		}
-	},
-
-	_initSlideoutMenus: function() {
-		if (this.leftSideMenuClass) {
-			this.$el.addClass('slideout-panel');
-			this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'left' });
-			this.$el.before( this.leftSideMenu.render().$el );
-			this.listenTo(this.leftSideMenu, 'open', function() {
-				this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
-			});
-			this.listenTo(this.leftSideMenu, 'close', function() {
-				setTimeout(_.bind(function() {
-					this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
-				}, this), 500);
-			});
-		}
-
-		if (this.rightSideMenuClass) {
-			this.$el.addClass('slideout-panel');
-			this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, navbar: this.navbar, 'side': 'right' });
-			this.$el.before( this.rightSideMenu.render().$el );
-			this.listenTo(this.rightSideMenu, 'open', function() {
-				this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
-			});
-			this.listenTo(this.rightSideMenu, 'close', function() {
-				setTimeout(_.bind(function() {
-					this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
-				}, this), 500);
-			});
-		}
 	}
 
 });
