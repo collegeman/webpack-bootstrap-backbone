@@ -52,6 +52,6 @@ $(function() {
   // and start keeping track of browser history changes
 	Backbone.history.start({ 
     root: location.host === 'collegeman.github.io' ? '/webpack-bootstrap-backbone' : '',
-    pushState: true 
+    pushState: false 
   });
 });

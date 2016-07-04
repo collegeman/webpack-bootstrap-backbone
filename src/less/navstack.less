@@ -23,6 +23,9 @@ body {
   transform: translate3d(0, 0, 0);
   -webkit-overflow-scrolling: touch;
   will-change: transform;
+  &.with-navbar-fixed-top {
+    padding-top: @navbar-height + @navbar-margin-bottom;
+  }
 }
 .-navstack-pane,
 .full-screen {

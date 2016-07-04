@@ -39,18 +39,21 @@ var AppView = Backbone.View.extend({
 		}
 	},
 
+	el: 'body',
+
 	initialize: function(options) {
 		Backbone.View.prototype.initialize.apply(this, arguments);		
 		// merge in any events from extensions of this view class
 		this.events = $.extend({}, AppView.prototype.events, this.events);
 		// setup the navstack
+		var $stage = $('<div id="stage"></div>');
 		this.stage = new Navstack({
-			el: this.$el
+			el: $stage
 		});
-		// drop this container into the body
-		$('body').append(this.$el);
+		// drop the stage into the body
+		$('body').append($stage);
 		// make navstack window height
-		this.$el.height( $(window).height() );
+		$stage.height( $(window).height() );
 		// initialize our router
 		this.router = new Workspace({ 'stage': this.stage });
 		// initialize the user object
