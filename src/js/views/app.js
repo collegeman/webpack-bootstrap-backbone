@@ -48,6 +48,7 @@ var AppView = Backbone.View.extend({
 		// setup the navstack
 		var $stage = $('<div id="stage"></div>');
 		this.stage = new Navstack({
+			transition: 'slide',
 			el: $stage
 		});
 		// drop the stage into the body

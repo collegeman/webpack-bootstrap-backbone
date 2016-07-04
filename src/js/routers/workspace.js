@@ -5,13 +5,16 @@ var Backbone = require('backbone');
 var Navstack = require('navstack');
 var HomePaneView = require('views/panes/home');
 var SearchPaneView = require('views/panes/search');
+var NextPaneView = require('views/panes/next');
 
 module.exports = Backbone.Router.extend({
 
 	routes: {
 		'': 'home',
 
-		'search': 'search'
+		'search': 'search',
+
+		'next': 'next'
 	},
 
 	initialize: function(options) {
@@ -28,6 +31,12 @@ module.exports = Backbone.Router.extend({
 	home: function() {
 		this.stage.push('home', function() {
 			return new HomePaneView();
+		});
+	},
+
+	next: function() {
+		this.stage.push('next', function() {
+			return new NextPaneView();
 		});
 	},
 

@@ -16,15 +16,28 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  -webkit-overflow-scrolling: touch;
   will-change: transform;
+
+  .content {
+    -webkit-overflow-scrolling: touch;
+    will-change: transform;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
   &.with-navbar-fixed-top {
-    padding-top: @navbar-height + @navbar-margin-bottom;
+    .content {
+      top: @navbar-height; // + @navbar-margin-bottom
+    }
   }
 }
 .-navstack-pane,

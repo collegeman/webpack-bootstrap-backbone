@@ -1,8 +1,10 @@
 'use strict';
 
 var $ = require('jquery');
+var _ = require('underscore');
 var Backbone = require('backbone');
 var BaseView = require('views/base');
+var rivets = require('rivets');
 
 var BasePaneView = BaseView.extend({
 
@@ -19,10 +21,11 @@ var BasePaneView = BaseView.extend({
 	},
 
 	render: function() {
-		BaseView.prototype.render.apply(this, arguments);
-		// initialize the navbar
+		this.$content = $('<div class="content"></div>');
+		this.$el.append(this.$content);
+		this.$content.html( this._template(this.model.attributes) );
+		rivets.bind(this.$content, { 'model': this.model });
 		this._renderNavbar();
-
 		return this;
 	},
 
@@ -34,10 +37,6 @@ var BasePaneView = BaseView.extend({
 			if (this.navbar.$el.hasClass('navbar-fixed-top')) {
 				this.$el.addClass('with-navbar-fixed-top');
 			}
-
-			this.$el.on('scroll', function() {
-				$navbar.css({ top: $(this).scrollTop() });
-			});
 		}
 	},
 
