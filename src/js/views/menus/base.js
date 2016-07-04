@@ -14,6 +14,8 @@ var BaseMenuView = BaseView.extend({
 
 	template: baseMenuTemplate,
 
+	touchEnabled: false,
+
 	initialize: function(options) {
 		var menuView = this;
 
@@ -33,6 +35,10 @@ var BaseMenuView = BaseView.extend({
 	    'tolerance': options.tolerance,
 	    'side': options.side
 	  });
+
+		if (!this.touchEnabled) {
+			this.menu.disableTouch();
+		}
 
 	 	this.$el.addClass('slideout-menu-' + options.side);
 	 

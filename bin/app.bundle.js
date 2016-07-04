@@ -19149,6 +19149,8 @@
 
 		template: baseMenuTemplate,
 
+		touchEnabled: false,
+
 		initialize: function(options) {
 			var menuView = this;
 
@@ -19168,6 +19170,10 @@
 		    'tolerance': options.tolerance,
 		    'side': options.side
 		  });
+
+			if (!this.touchEnabled) {
+				this.menu.disableTouch();
+			}
 
 		 	this.$el.addClass('slideout-menu-' + options.side);
 		 
@@ -22150,28 +22156,32 @@
 				this.$el.addClass('slideout-panel');
 				this.leftSideMenu = new this.leftSideMenuClass({ panel: this.el, 'side': 'left' });
 				$('body').prepend( this.leftSideMenu.render().$el );
-				this.listenTo(this.leftSideMenu, 'open', function() {
-					this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
-				});
-				this.listenTo(this.leftSideMenu, 'close', function() {
-					setTimeout(_.bind(function() {
-						this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
-					}, this), 300);
-				});
+				if (this.leftSideMenu.touchEnabled) {
+					this.listenTo(this.leftSideMenu, 'open', function() {
+						this.rightSideMenu && this.rightSideMenu.menu.disableTouch();
+					});
+					this.listenTo(this.leftSideMenu, 'close', function() {
+						setTimeout(_.bind(function() {
+							this.rightSideMenu && this.rightSideMenu.menu.enableTouch();
+						}, this), 300);
+					});
+				}
 			}
 
 			if (this.rightSideMenuClass) {
 				this.$el.addClass('slideout-panel');
 				this.rightSideMenu = new this.rightSideMenuClass({ panel: this.el, 'side': 'right' });
 				$('body').prepend( this.rightSideMenu.render().$el );
-				this.listenTo(this.rightSideMenu, 'open', function() {
-					this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
-				});
-				this.listenTo(this.rightSideMenu, 'close', function() {
-					setTimeout(_.bind(function() {
-						this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
-					}, this), 300);
-				});
+				if (this.rightSideMenu.touchEnabled) {
+					this.listenTo(this.rightSideMenu, 'open', function() {
+						this.leftSideMenu && this.leftSideMenu.menu.disableTouch();
+					});
+					this.listenTo(this.rightSideMenu, 'close', function() {
+						setTimeout(_.bind(function() {
+							this.leftSideMenu && this.leftSideMenu.menu.enableTouch();
+						}, this), 300);
+					});
+				}
 			}
 		}
 
