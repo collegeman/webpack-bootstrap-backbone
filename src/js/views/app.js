@@ -8,6 +8,7 @@ var User = require('models/user');
 var AuthModalView = require('views/modals/auth');
 var rivets = require('rivets');
 var Navstack = require('navstack');
+var Workspace = require('routers/workspace');
 
 var AppView = Backbone.View.extend({
 
@@ -18,16 +19,30 @@ var AppView = Backbone.View.extend({
 	 */
 	userClass: User,
 
+	routerClass: Workspace,
+
 	/**
 	 * Set this to true to require an authenticated
 	 * session on app startup.
 	 */
 	requiresSession: false,
 
+	events: {
+		/**
+		 * Setup route: URL prefix, and pass any such clicks
+		 * through this.router.navigate
+		 */
+		'click [href^="route:"]': function(e) {
+			var $clicked = $(e.currentTarget);
+			this.router.navigate(( $clicked.attr('href') || '' ).substring(6), { trigger: true });
+			return false;
+		}
+	},
+
 	initialize: function(options) {
 		Backbone.View.prototype.initialize.apply(this, arguments);		
-		// incorporate subclass' events for delegation
-		this.events = $.extend({}, AppView.prototype.events, this.events || {});
+		// merge in any events from extensions of this view class
+		this.events = $.extend({}, AppView.prototype.events, this.events);
 		// setup the navstack
 		this.stage = new Navstack({
 			el: this.$el
@@ -36,6 +51,8 @@ var AppView = Backbone.View.extend({
 		$('body').append(this.$el);
 		// make navstack window height
 		this.$el.height( $(window).height() );
+		// initialize our router
+		this.router = new Workspace({ 'stage': this.stage });
 		// initialize the user object
 		this._initUserObject();
 		// if this app requires a session, kick-off logged-in state test

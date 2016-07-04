@@ -2,32 +2,39 @@
 
 var $ = require('jquery');
 var Backbone = require('backbone');
-var AppView = require('views/app');
+var Navstack = require('navstack');
 var HomePaneView = require('views/panes/home');
+var SearchPaneView = require('views/panes/search');
 
 module.exports = Backbone.Router.extend({
 
 	routes: {
 		'': 'home',
-		'settings': 'settings'
+
+		'search': 'search'
 	},
 
 	initialize: function(options) {
-		this.options = $.extend({}, options, {});
-		if (!this.options) {
-			this.options.app = new AppView();
-		}
-		this.app = this.options.app;
+		var options = $.extend({
+			// setup the navstack
+			stage: new Navstack({
+				el: $('<div></div>')
+			})
+		}, options);
+
+		this.stage = options.stage;
 	},
 
 	home: function() {
-		this.app.stage.push('home', function() {
+		this.stage.push('home', function() {
 			return new HomePaneView();
 		});
 	},
 
-	settings: function() {
-
+	search: function() {
+		this.stage.push('search!search', function() {
+			return new SearchPaneView();
+		});
 	}
 
 });

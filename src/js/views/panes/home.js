@@ -5,7 +5,6 @@ var _ = require('underscore');
 var BasePaneView = require('views/panes/base');
 var BaseMenuView = require('views/menus/base');
 var BootstrapNavbarView = require('views/bootstrap/navbar');
-
 var HomePaneView = BasePaneView.extend({
 
 	leftSideMenuClass: BaseMenuView,
@@ -13,6 +12,8 @@ var HomePaneView = BasePaneView.extend({
 	rightSideMenuClass: BaseMenuView,
 
 	navbarClass: BootstrapNavbarView,
+
+	template: require('text!templates/panes/home.html'),
 
 	events: {
 		'click [data-action="toggle-right-side-menu"]': function() {

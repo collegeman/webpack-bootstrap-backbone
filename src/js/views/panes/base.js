@@ -12,6 +12,7 @@ var BasePaneView = BaseView.extend({
 
 	initialize: function() {
 		BaseView.prototype.initialize.apply(this, arguments);
+		
 		this.on('navstack:sleep', this._sleep);
 		this.on('navstack:wake', this._wakeUp);
 		this.once('navstack:wake', this.render);
@@ -30,7 +31,7 @@ var BasePaneView = BaseView.extend({
 			this.navbar = new this.navbarClass();
 			this.$el.append( this.navbar.render().$el );
 			if (this.navbar.$el.hasClass('navbar-fixed-top')) {
-				$('body').addClass('with-navbar-fixed-top');
+				this.$el.addClass('with-navbar-fixed-top');
 			}
 		}
 	},
