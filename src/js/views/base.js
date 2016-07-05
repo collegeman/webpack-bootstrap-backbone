@@ -25,8 +25,12 @@ var BaseView = Backbone.View.extend({
 		this._template = _.template(this.template);
 	},
 
+	data: function() {
+		return this.model.attributes;
+	},
+
 	render: function() {
-		this.$el.html( this._template(this.model.attributes) );
+		this.$el.html( this._template( this.data() ) );
 		rivets.bind(this.$el, { 'model': this.model });
 		return this;
 	}

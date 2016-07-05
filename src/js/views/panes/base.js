@@ -23,7 +23,7 @@ var BasePaneView = BaseView.extend({
 	render: function() {
 		this.$content = $('<div class="content"></div>');
 		this.$el.append(this.$content);
-		this.$content.html( this._template(this.model.attributes) );
+		this.$content.html( this._template( this.data() ) );
 		rivets.bind(this.$content, { 'model': this.model });
 		this._renderNavbar();
 		return this;
