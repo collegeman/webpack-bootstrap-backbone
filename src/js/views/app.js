@@ -1,6 +1,8 @@
 /**
  * This view is the container for all other views.
- * Just subclass it to build your own.
+ * You should only subclass it if you need to add other global
+ * events. Otherwise, subclass BasePaneView instead, and inject
+ * them into the app via the Workspace router.
  */
 var $ = require('jquery');
 var Backbone = require('backbone');

@@ -36,13 +36,14 @@ body {
 
   &.with-navbar-fixed-top {
     .content {
-      top: @navbar-height; // + @navbar-margin-bottom
+      top: @navbar-height + @navbar-margin-bottom;
     }
   }
 }
+
 .-navstack-pane,
 .full-screen {
-  background: @body-bg;
+  background: @pane-bg;
 }
 .-navstack-nav {
   z-index: 3;

@@ -1,45 +1,36 @@
 .modal-dialog-auth {
 
-	max-width: 400px;
+	max-width: 300px;
 	margin: 50px auto 0 !important;
-
-	@media screen and (max-width: @screen-xs) {
-		max-width: auto;
-		margin: 50px 15px 0 !important;
-	}
 
 	position: relative;
 
 	.alert {
 		text-align: center;
-
-		&.alert-danger {
-			.alert-variant(@alert-info-bg; @alert-info-border; @alert-info-text);
-		}
 	}
 
 	.arrow-up {
 		display: none;
 	  width: 0; 
 	  height: 0; 
-	  border-left: 12px solid transparent;
-	  border-right: 12px solid transparent;	  
-	  border-bottom: 12px solid white;
+	  border-left: 8px solid transparent;
+	  border-right: 8px solid transparent;	  
+	  border-bottom: 8px solid @input-border;
 	  position: absolute;
 	  top: 42px;
-	  left: 29px;
 	}
 
 	&.signin {
 		.arrow-up {
 			display: block;
+			left: 32px;
 		}
 	}
 
 	&.signup {
 		.arrow-up {
 			display: block;
-			left: 116px;
+			left: 120px;
 		}
 	}
 
@@ -47,7 +38,7 @@
 		.arrow-up {
 			left: auto;
 			display: block;
-			right: 28px;
+			right: 32px;
 		}
 	}
 
@@ -65,12 +56,7 @@
 				font-weight: bold;
 				color: @brand-primary !important;
 			}
-
-			&.active {
-				a {
-					color: white !important;
-				}
-			}
+			
 		}
 
 
