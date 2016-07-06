@@ -51,7 +51,7 @@ $(function() {
 
   // and start keeping track of browser history changes
 	Backbone.history.start({ 
-    root: location.host === 'collegeman.github.io' ? '/webpack-bootstrap-backbone' : '',
+    root: location.host === 'collegeman.github.io' ? '/lookbook-demo' : '',
     pushState: false 
   });
 });
