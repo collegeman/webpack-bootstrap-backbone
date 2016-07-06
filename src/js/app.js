@@ -11,7 +11,7 @@ var Workspace = require('./routers/workspace');
 // import FastClick, to improve UI responsiveness on mobile
 var FastClick = require('fastclick');
 // and last but not least, import our AppView
-var AppView = require('views/app');
+var LookBookView = require('views/lookbook');
 
 $(function() {
 
@@ -47,7 +47,7 @@ $(function() {
   FastClick.attach(document.body);
 
   // initialize our app view
-  window.app = new AppView();
+  window.app = new LookBookView();
 
   // and start keeping track of browser history changes
 	Backbone.history.start({ 

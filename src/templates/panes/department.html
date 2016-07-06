@@ -1,0 +1,20 @@
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-xs-12">
+
+			<h1 class="department-name list-group-heading"><%= department.get('name') %></h1>
+			<ul class="people">
+				<% _.each(department.people(), function(person) { %>
+					<li class="person">
+						<a href="route:people/<%= person.cid %>" title="<%= person.get('name') %>" style="background-image:url('<%= person.get('img') %>');"></a>
+					</li>
+				<% }) %>
+			</ul>
+
+		</div>
+
+	</div>
+
+</div>

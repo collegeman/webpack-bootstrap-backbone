@@ -35,8 +35,13 @@ var AppView = Backbone.View.extend({
 		 * through this.router.navigate
 		 */
 		'click [href^="route:"]': function(e) {
-			var $clicked = $(e.currentTarget);
-			this.router.navigate(( $clicked.attr('href') || '' ).substring(6), { trigger: true });
+			var $clicked = $(e.currentTarget),
+					route = ( $clicked.attr('href') || '' ).substring(6);
+			if (route === 'back') {
+				history.back();
+			} else {
+				this.router.navigate(route, { trigger: true });
+			}
 			return false;
 		}
 	},

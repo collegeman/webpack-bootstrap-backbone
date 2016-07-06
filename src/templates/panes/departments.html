@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="list-group-heading">Departments</h1>
+			<div class="list-group">
+			 <% _.each(departments.where({ 'parent': undefined }), function(department) { %>
+			 	<a class="list-group-item" href="route:departments/<%= department.cid %>">
+			 		<span class="media-body">
+			 			<%= department.get('name') %>
+			 		</span>
+			 		<span class="media-right">
+			 			<i class="fa fa-chevron-right"></i>
+			 		</span>
+			 	</a>
+			 	<% _.each(departments.where({ 'parent': department.cid }), function(department) { %>
+			 		<a class="list-group-item child-department" href="route:departments/<%= department.cid %>">
+				 		<span class="media-body">
+				 			&mdash;&nbsp;<%= department.get('name') %>
+				 		</span>
+				 		<span class="media-right">
+				 			<i class="fa fa-chevron-right"></i>
+				 		</span>
+				 	</a>
+			 	<% }) %>
+			 <% }) %>
+			</div>
+		</div>
+	</div>
+</div>

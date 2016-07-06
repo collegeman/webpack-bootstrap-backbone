@@ -1,18 +1,18 @@
 {
   "name": "pm",
   "version": "1.0.0",
-  "description": "webpack-bootstrap-backbone",
+  "description": "wbb-lookbook",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/collegeman/webpack-bootstrap-backbone"
+    "url": "http://github.com/collegeman/wbb-lookbook"
   },
   "author": "Aaron Collegeman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/collegeman/webpack-bootstrap-backbone"
+    "url": "https://github.com/collegeman/wbb-lookbook"
   },
-  "homepage": "https://github.com/collegeman/webpack-bootstrap-backbone",
+  "homepage": "https://github.com/collegeman/wbb-lookbook",
   "devDependencies": {
     "backbone": "^1.3.3",
     "bootstrap-webpack": "0.0.5",

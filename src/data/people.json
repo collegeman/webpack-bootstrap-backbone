@@ -1,0 +1,44 @@
+[{
+	"name": "Aaron Collegeman",
+	"img": "https://s3.amazonaws.com/uifaces/faces/twitter/tonypeterson/128.jpg",
+	"title": "Full-Stack Developer, Product Manager",
+	"book": "The Lean Startup",
+	"vacation": "Tibet, Zen Buddhist Retreat",
+	"challenge": "Shipping a native mobile application",
+	"departments": [{
+		"name": "Regional and B2B Marketing",
+		"children": [
+			{
+				"name": "Europe"
+			}
+		]
+	}]
+},{
+	"name": "Addie Lingle",
+	"img": "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
+	"title": "Marketing Events Manager",
+	"book": "Buddhist Bootcamp",
+	"vacation": "da Beach",
+	"departments": [{
+		"name": "Regional and B2B Marketing",
+		"children": [
+			{
+				"name": "Americas"
+			}
+		]
+	}]
+},{
+	"name": "Brian Helton",
+	"img": "https://s3.amazonaws.com/uifaces/faces/twitter/dustin/128.jpg",
+	"title": "President",
+	"book": "Diary of Wimpy Kid",
+	"challenge": "Getting out of bed tomorrow",
+	"departments": [{
+		"name": "Corporate Comms",
+		"children": [
+			{
+				"name": "Crisis Intervention"
+			}
+		]
+	}]
+}]

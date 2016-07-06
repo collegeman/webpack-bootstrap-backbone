@@ -15,23 +15,27 @@ var BasePaneView = BaseView.extend({
 	initialize: function() {
 		BaseView.prototype.initialize.apply(this, arguments);
 
-		this.on('navstack:sleep', this._sleep);
-		this.on('navstack:wake', this._wakeUp);
-		this.once('navstack:wake', this.render);
+		this.on('navstack:sleep', _.bind(this._sleep, this));
+		this.on('navstack:wake', _.bind(this._wakeUp, this));
+		this.once('navstack:wake', _.bind(this.render, this));
+		this.once('navstack:wake', _.bind(this._renderNavbar, this));
+
+		this.$content = $('<div class="content"></div>');
+		this.$el.append(this.$content);
 	},
 
 	render: function() {
-		this.$content = $('<div class="content"></div>');
-		this.$el.append(this.$content);
 		this.$content.html( this._template( this.data() ) );
-		rivets.bind(this.$content, { 'model': this.model });
-		this._renderNavbar();
+		rivets.bind(this.$content, { 
+			'view': this,
+			'model': this.model 
+		});
 		return this;
 	},
 
 	_renderNavbar: function() {
 		if (this.navbarClass) {
-			this.navbar = new this.navbarClass();
+			this.navbar = new this.navbarClass({ parent: this });
 			var $navbar = this.navbar.render().$el;
 			this.$el.append( $navbar );
 			if (this.navbar.$el.hasClass('navbar-fixed-top')) {

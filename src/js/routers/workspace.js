@@ -3,18 +3,20 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 var Navstack = require('navstack');
-var HomePaneView = require('views/panes/home');
+var DepartmentPaneView = require('views/panes/department');
+var DepartmentsPaneView = require('views/panes/departments');
 var SearchPaneView = require('views/panes/search');
-var NextPaneView = require('views/panes/next');
 
 module.exports = Backbone.Router.extend({
 
 	routes: {
-		'': 'home',
+		'': 'departments',
 
-		'search': 'search',
+		'departments/:id': 'departments',
 
-		'next': 'next'
+		'people/:id': 'person',
+
+		'search': 'search'
 	},
 
 	initialize: function(options) {
@@ -28,15 +30,23 @@ module.exports = Backbone.Router.extend({
 		this.stage = options.stage;
 	},
 
-	home: function() {
-		this.stage.push('home', function() {
-			return new HomePaneView();
-		});
+	departments: function(id) {
+		if (id) {
+			this.stage.push('departments:' + id, function() {
+				var department = app.people.departments.get({ 'cid': id });
+				return new DepartmentPaneView({ model: department });
+			});
+		} else {
+			this.stage.push('departments', function() {
+				return new DepartmentsPaneView();
+			});
+		}
 	},
 
-	next: function() {
-		this.stage.push('next', function() {
-			return new NextPaneView();
+	person: function(id) {
+		this.stage.push('people:' + id, function() {
+			var person = app.epople.get(id);
+			return new PersonPaneView({ model: person });
 		});
 	},
 
