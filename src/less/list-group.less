@@ -9,12 +9,16 @@
 
 .list-group {
 
-	margin: 0 (-1 * @grid-gutter-width / 2) 20px;
+	@media screen and (max-width: @screen-xs) {
 
-	.list-group-item {
-		border-left: 0;
-		border-right: 0;
-		border-radius: 0 !important;
+		margin: 0 (-1 * @grid-gutter-width / 2) 20px;
+
+		.list-group-item {
+			border-left: 0;
+			border-right: 0;
+			border-radius: 0 !important;
+		}
+
 	}
 
 }
